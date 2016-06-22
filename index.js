@@ -1,6 +1,8 @@
 /* jshint node: true */
 'use strict';
 
+// THIS IS WHERE I LEFT OFF
+// PROBABLY MAKE THIS A CLASS
 var queue = require('./lib/queue');
 
 module.exports = {
