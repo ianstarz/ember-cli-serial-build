@@ -1,29 +1,30 @@
 /* jshint node: true */
 'use strict';
 
-// THIS IS WHERE I LEFT OFF
-// PROBABLY MAKE THIS A CLASS
-var queue = require('./lib/queue');
+var Queue = require('./lib/queue');
 
 module.exports = {
   name: 'ember-cli-serial-build',
 
   setupPreprocessorRegistry: function(type, registry) {
+    let queue = this.queue || new Queue();
+    this.queue = queue;
+
     registry.add('css', {
       toTree: function(tree) {
-        return queue(tree, { registryType: type, treeType: 'css' });
+        return queue.add(tree, { registryType: type, treeType: 'css' });
       }
     });
 
     registry.add('js', {
       toTree: function(tree) {
-        return queue(tree, { registryType: type, treeType: 'js' });
+        return queue.add(tree, { registryType: type, treeType: 'js' });
       }
     });
 
     registry.add('template', {
       toTree: function(tree) {
-        return queue(tree, { registryType: type, treeType: 'template' });
+        return queue.add(tree, { registryType: type, treeType: 'template' });
       }
     });
   }
